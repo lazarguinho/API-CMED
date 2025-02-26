@@ -38,40 +38,36 @@ class Medicamento {
 }
 
 class Laboratorio {
-    - id_laboratorio: string
+    - id: string
     - nome: string
     - cnpj: string
     - endereco: string
     - telefone: string
     - email: string
-    - site: string
-    - responsavel_tecnico: string
+    - data_cadastro: date
+    - atividade_principal: string
+    - natureza_juridica: string
+    - status: string
 }
 
-class Registros {
-    - id_registro: string
+class Registro {
+    - id: string
     - id_medicamento: string
     - codigo_ggrem: string
     - registro_anvisa: string
     - ean1: string
     - ean2: string
     - ean3: string
-    - status_produto: string
 }
 
-class Substancias {
-    - id_substancia: string
+class Substancia {
+    - id: string
     - nome: string
-    - codigo_dcb: string
-    - uso_controlado: boolean
     - classificacao_terapeutica: string
-    - potencia: string
-    - forma_quimica: string
-    - descricao: string
 }
 
 class HistoricoPrecos {
-    - id_historico: string
+    - id: string
     - id_medicamento: string
     - data_comercializacao: date
     - pf_sem_impostos: decimal
