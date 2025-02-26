@@ -20,6 +20,79 @@ A API-CMED fornece acesso ao histórico de preços de medicamentos no Brasil, fa
 
 ### 🔮 Entidades e Relacionamentos
 
+```mermaid
+---
+title: Estrutura do Banco de Dados
+---
+classDiagram
+class Medicamento {
+    - id: string
+    - nome: string
+    - id_laboratorio: string
+    - id_substancia: string
+    - apresentacao: string
+    - classe_terapeutica: string
+    - tarja: string
+    - restricao_hospitalar: boolean
+    - tipo_produto: string
+}
+
+class Laboratorio {
+    - id_laboratorio: string
+    - nome: string
+    - cnpj: string
+    - endereco: string
+    - telefone: string
+    - email: string
+    - site: string
+    - responsavel_tecnico: string
+}
+
+class Registros {
+    - id_registro: string
+    - id_medicamento: string
+    - codigo_ggrem: string
+    - registro_anvisa: string
+    - ean1: string
+    - ean2: string
+    - ean3: string
+    - status_produto: string
+}
+
+class Substancias {
+    - id_substancia: string
+    - nome: string
+    - codigo_dcb: string
+    - uso_controlado: boolean
+    - classificacao_terapeutica: string
+    - potencia: string
+    - forma_quimica: string
+    - descricao: string
+}
+
+class HistoricoPrecos {
+    - id_historico: string
+    - id_medicamento: string
+    - data_comercializacao: date
+    - pf_sem_impostos: decimal
+    - pf_0: decimal
+    - pf_12: decimal
+    - pf_17: decimal
+    - pf_18: decimal
+    - pmc_sem_imposto: decimal
+    - pmc_0: decimal
+    - pmc_12: decimal
+    - pmc_17: decimal
+    - pmc_18: decimal
+}
+
+Medicamento --> Laboratorio: pertence a
+Medicamento --> Substancias: contem
+Medicamento --> Registros: possui
+Medicamento --> HistoricoPrecos: tem historico
+
+```
+
 ## 📝 Como Usar
 
 ### Instalação
