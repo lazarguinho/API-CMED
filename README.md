@@ -82,10 +82,10 @@ class HistoricoPrecos {
     - pmc_18: decimal
 }
 
-Medicamento --> Laboratorio: N:1
-Medicamento --> Substancia: N:1
-Medicamento --> Registro: 1:1
-Medicamento --> HistoricoPrecos: 1:N
+Medicamento --> Laboratorio: N-1
+Medicamento --> Substancia: N-1
+Medicamento --> Registro: 1-1
+Medicamento --> HistoricoPrecos: 1-N
 
 ```
 
