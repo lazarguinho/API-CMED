@@ -83,8 +83,8 @@ class HistoricoPrecos {
 }
 
 Medicamento --> Laboratorio: pertence a
-Medicamento --> Substancias: contem
-Medicamento --> Registros: possui
+Medicamento --> Substancia: contem
+Medicamento --> Registro: possui
 Medicamento --> HistoricoPrecos: tem historico
 
 ```
