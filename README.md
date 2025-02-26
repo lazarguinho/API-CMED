@@ -1,12 +1,29 @@
 # API-CMED
 A API-CMED fornece acesso ao histórico de preços de medicamentos no Brasil, facilitando consultas por nome ou registro. Atualizada regularmente com dados oficiais, permite filtragem por período e oferece respostas em JSON ou XML. Ideal para análises de mercado, pesquisas acadêmicas e desenvolvimento de aplicações relacionadas à saúde.
 
+## 📖 Sumário
+
+1. [Funcionalidades](#-funcionalidades)
+2. [Tecnologias Utilizadas](#️-tecnologias-utilizadas)
+3. [Estrutura do Banco de Dados](#-estrutura-do-banco-de-dados)
+   - [Entidades e Relacionamentos](#-entidades-e-relacionamentos)
+4. [Como Usar](#-como-usar)
+   - [Instalação](#instalação)
+   - [Configuração](#configuração)
+   - [Endpoints](#endpoints)
+
 ## 💡 Funcionalidades
 
-Consulta de Preços: Obtenha o histórico de preços de um medicamento por nome ou registro.
+## 🛠️ Tecnologias Utilizadas
 
-Filtragem por Período: Acesse variações de preço em um intervalo de datas.
+## 🔄 Estrutura do Banco de Dados
 
-Atualização Regular: Dados extraídos de fontes oficiais como ANVISA e CMED.
+### 🔮 Entidades e Relacionamentos
 
-Resposta em JSON/XML: Formatos flexíveis para facilitar integração.
+## 📝 Como Usar
+
+### Instalação
+
+### Configuração
+
+### Endpoints
