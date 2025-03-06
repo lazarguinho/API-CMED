@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Optional, List
 
 class MedicamentoSchema(BaseModel):
     id: Optional[str] = Field(None, alias="_id")
@@ -9,6 +9,12 @@ class MedicamentoSchema(BaseModel):
     tarja: str
     restricao_hospitalar: bool
     tipo_produto: str
+
+    laboratorio_id: str
+    registro_id: Optional[str]
+    substancias: List[str] = []
+    historico_precos: Optional[List[str]] = []
+
 
     class Config:
         json_schema_extra = {

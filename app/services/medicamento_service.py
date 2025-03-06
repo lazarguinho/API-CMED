@@ -2,7 +2,7 @@ from motor.motor_asyncio import AsyncIOMotorDatabase
 from fastapi import Depends, HTTPException
 from bson import ObjectId
 from app.schemas.medicamento import MedicamentoSchema
-from app.config.database import get_database  # Importamos de config.database
+from app.config.database import get_database
 
 class MedicamentoService:
     def __init__(self, db: AsyncIOMotorDatabase = Depends(get_database)):  
