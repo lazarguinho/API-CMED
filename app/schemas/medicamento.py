@@ -15,7 +15,6 @@ class MedicamentoSchema(BaseModel):
     substancias: List[str] = []
     historico_precos: Optional[List[str]] = []
 
-
     class Config:
         json_schema_extra = {
             "example": {
@@ -24,6 +23,8 @@ class MedicamentoSchema(BaseModel):
                 "classe_terapeutica": "M3B - RELAXANTE MUSCULAR DE AÇÃO CENTRAL",
                 "tarja": "Tarja Vermelha",
                 "restricao_hospitalar": False,
-                "tipo_produto": "Similar"
+                "tipo_produto": "Similar",
+                "laboratorio_id": "string",
+                "substancias": []
             }
         }
