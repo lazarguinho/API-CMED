@@ -17,6 +17,10 @@ async def get_medicamentos(service: MedicamentoService = Depends()):
 async def get_medicamento(medicamento_id: str, service: MedicamentoService = Depends()):
     return await service.get_medicamento(medicamento_id)
 
+@router.put("/medicamentos/{medicamento_id}", response_model=dict)
+async def update_medicamento(medicamento_id: str, medicamento: MedicamentoSchema, service: MedicamentoService = Depends()):
+    return await service.update_medicamento(medicamento_id, medicamento)
+
 @router.delete("/medicamentos/{medicamento_id}")
 async def delete_medicamento(medicamento_id: str, service: MedicamentoService = Depends()):
     return await service.delete_medicamento(medicamento_id)
