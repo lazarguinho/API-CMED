@@ -1,10 +1,46 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, UploadFile, File
 from typing import List
 from app.schemas.substancia import SubstanciaSchema
 from app.services.substancia_service import SubstanciaService
 from app.config.database import db
 
 router = APIRouter()
+
+@router.post(
+    "/upload/substancias", 
+    response_model=dict,
+    tags=["Substancias"],
+    responses={
+        200: {
+            "description": "Importação realizada com sucesso",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "message": "Processamento concluído",
+                        "total_processado": 100,
+                        "inseridos": 80,
+                        "atualizados": 15,
+                        "erros": ["Erro na linha 5: Nome da substância não encontrado"]
+                    }
+                }
+            }
+        }
+    },
+    summary="Importar substâncias de um arquivo CSV",
+    description="""
+    Recebe um arquivo CSV, processa os dados e insere os registros na coleção de substâncias.
+    
+    - Lê o arquivo CSV.
+    - Normaliza os nomes das colunas para garantir compatibilidade.
+    - Extrai substâncias únicas e suas classificações terapêuticas.
+    - Insere os registros na base de dados.
+    """
+)
+async def upload_substancias(
+    file: UploadFile = File(...),
+    service: SubstanciaService = Depends()
+):
+    return await service.upload_csv(file)
 
 @router.post("/substancias/", response_model=dict)
 async def create_substancia(substancia: SubstanciaSchema, service: SubstanciaService = Depends()):

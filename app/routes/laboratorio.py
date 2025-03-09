@@ -1,10 +1,46 @@
-from fastapi import APIRouter, Depends
-from typing import List
+from fastapi import APIRouter, Depends, UploadFile, File, HTTPException
+from typing import List, Optional
 from app.schemas.laboratorio import LaboratorioSchema
 from app.services.laboratorio_service import LaboratorioService
 from app.config.database import db
 
 router = APIRouter()
+
+@router.post(
+    "/upload/laboratorios", 
+    response_model=dict,
+    tags=["Laboratorios"],
+    responses={
+        200: {
+            "description": "Importação realizada com sucesso",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "message": "Processamento concluído",
+                        "total_processado": 100,
+                        "inseridos": 80,
+                        "atualizados": 15,
+                        "erros": ["Erro na linha 5: CNPJ não encontrado"]
+                    }
+                }
+            }
+        }
+    },
+    summary="Importar laboratórios de um arquivo CSV",
+    description="""
+    Recebe um arquivo CSV, processa os dados e insere os registros na coleção de laboratórios.
+    
+    - Lê o arquivo CSV.
+    - Normaliza os nomes das colunas para garantir compatibilidade.
+    - Renomeia as colunas para corresponder ao modelo de dados.
+    - Insere os registros na base de dados.
+    """
+)
+async def upload_laboratorios(
+    file: UploadFile = File(...),
+    service: LaboratorioService = Depends()
+):
+    return await service.upload_csv(file)
 
 @router.post("/laboratorios/", response_model=dict)
 async def create_laboratorio(laboratorio: LaboratorioSchema, service: LaboratorioService = Depends()):
