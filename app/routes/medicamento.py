@@ -1,10 +1,46 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends,UploadFile, File
 from typing import List
 from app.schemas.medicamento import MedicamentoSchema
 from app.services.medicamento_service import MedicamentoService
 from app.config.database import db
 
 router = APIRouter()
+
+@router.post(
+    "/upload/medicamentos", 
+    response_model=dict,
+    tags=["Medicamentos"],
+    responses={
+        200: {
+            "description": "Importação realizada com sucesso",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "message": "Processamento concluído",
+                        "total_processado": 100,
+                        "inseridos": 80,
+                        "atualizados": 15,
+                        "erros": ["Erro na linha 5: Laboratório não encontrado"]
+                    }
+                }
+            }
+        }
+    },
+    summary="Importar medicamentos de um arquivo CSV",
+    description="""
+    Recebe um arquivo CSV, processa os dados e insere os registros na coleção de medicamentos.
+    
+    - Lê o arquivo CSV.
+    - Normaliza os nomes das colunas para garantir compatibilidade.
+    - Estabelece relações com laboratórios e substâncias.
+    - Insere os registros na base de dados.
+    """
+)
+async def upload_medicamentos(
+    file: UploadFile = File(...),
+    service: MedicamentoService = Depends()
+):
+    return await service.upload_csv(file)
 
 @router.get("/filter/medicamento", response_model=dict)
 async def filtrar_medicamentos(nome: str = None, classe_terapeutica: str = None, tarja: str = None, tipo_produto: str = None):

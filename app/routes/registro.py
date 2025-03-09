@@ -1,10 +1,46 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, File, UploadFile
 from typing import List
 from app.schemas.registro import RegistroSchema
 from app.services.registro_service import RegistroService
 from app.config.database import db
 
 router = APIRouter()
+
+@router.post(
+    "/upload/registros", 
+    response_model=dict,
+    tags=["Registros"],
+    responses={
+        200: {
+            "description": "Importação realizada com sucesso",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "message": "Processamento concluído",
+                        "total_processado": 100,
+                        "inseridos": 80,
+                        "atualizados": 15,
+                        "erros": ["Erro na linha 5: Medicamento não encontrado"]
+                    }
+                }
+            }
+        }
+    },
+    summary="Importar registros de um arquivo CSV",
+    description="""
+    Recebe um arquivo CSV, processa os dados e insere os registros na coleção de registros.
+    
+    - Lê o arquivo CSV.
+    - Normaliza os nomes das colunas para garantir compatibilidade.
+    - Estabelece relações com medicamentos.
+    - Insere os registros na base de dados.
+    """
+)
+async def upload_registros(
+    file: UploadFile = File(...),
+    service: RegistroService = Depends()
+):
+    return await service.upload_csv(file)
 
 @router.post("/registros/", response_model=dict)
 async def create_registro(registro: RegistroSchema, service: RegistroService = Depends()):
