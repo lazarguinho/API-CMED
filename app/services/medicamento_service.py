@@ -77,7 +77,7 @@ class MedicamentoService:
         try:
             # Lê o arquivo CSV e converte em DataFrame do Pandas
             contents = await file.read()
-            df = pd.read_csv(io.BytesIO(contents))
+            df = pd.read_csv(io.BytesIO(contents), dtype=str, low_memory=False)
 
             # Normaliza os nomes das colunas
             df.columns = [self.normalizar_nome_coluna(col) for col in df.columns]
