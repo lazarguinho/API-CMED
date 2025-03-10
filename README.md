@@ -2,6 +2,10 @@
 
 A API-CMED fornece acesso ao histórico de preços de medicamentos no Brasil, facilitando consultas por nome ou registro. Atualizada regularmente com dados oficiais, permite filtragem por período e oferece respostas em JSON ou XML. Ideal para análises de mercado, pesquisas acadêmicas e desenvolvimento de aplicações relacionadas à saúde.
 
+relatório: [Relatório Completo](RelarotioPersistencia4.pdf)
+
+vídeo explicativo: 
+
 ## 📖 Sumário
 
 1. [Funcionalidades](#-funcionalidades)
@@ -11,11 +15,17 @@ A API-CMED fornece acesso ao histórico de preços de medicamentos no Brasil, fa
 4. [Como Usar](#-como-usar)
    - [Instalação](#instalação)
    - [Configuração](#configuração)
-   - [Endpoints](#endpoints)
 
 ## 💡 Funcionalidades
+- Consulta de histórico de preços de medicamentos por nome ou registro.
+
+- Filtragem de resultados, contagem, consultas paginadas, operações de crud nas entidades 
+
+- Dados atualizados com informações oficiais do governo: https://www.gov.br/anvisa/pt-br/assuntos/medicamentos/cmed/precos/anos-anteriores/anos-anteriores.
 
 ## 🛠️ Tecnologias Utilizadas
+
+fastapi, motor, bson, pandas, io, unidecode, datetime, typing
 
 ## 🔄 Estrutura do Banco de Dados
 
@@ -94,6 +104,34 @@ Medicamento --> HistoricoPrecos: 1-N
 
 ### Instalação
 
+1. Clone o repositório:
+
+   ```bash
+   git clone https://github.com/seuusuario/api-cmed.git
+   cd api-cmed
+   ```
+
+2. Crie e ative um ambiente virtual (opcional):
+
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # No Windows use: venv\Scripts\activate
+   ```
+
+3. Instale as dependências:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
 ### Configuração
 
-### Endpoints
+1. Configure a conexão com o MongoDB no arquivo `.env`:
+   ```env
+   MONGO_URI=mongodb://localhost:27017/cmed
+   ```
+2. Inicie a API executando o comando dentro da pasta `api-cmed`:
+   ```bash
+   uvicorn app.main:app --reload
+   ```
+
