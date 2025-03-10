@@ -4,7 +4,7 @@ A API-CMED fornece acesso ao histórico de preços de medicamentos no Brasil, fa
 
 relatório: [Relatório Completo](RelarotioPersistencia4.pdf)
 
-vídeo explicativo: 
+vídeo explicativo: https://www.youtube.com/watch?v=mR8gSRQh0bI
 
 ## 📖 Sumário
 
